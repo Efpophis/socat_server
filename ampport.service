@@ -1,0 +1,12 @@
+[Unit]
+Description=SOCAT server for ALS-600 relay
+#After=mediacenter.service
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/scripts/socat_amp.sh
+Restart=always
+
+[Install]
+WantedBy=default.target
