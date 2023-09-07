@@ -1,6 +1,6 @@
 [Unit]
 Description=SOCAT server for ALS-600 relay
-#After=mediacenter.service
+After=network.target
 
 [Service]
 Type=simple
