@@ -20,3 +20,7 @@ SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6001",ATTRS{serial}
 # add symlinks, optionally, for your specific equipment.
 KERNEL=="ttyUSB0",SYMLINK+="ldgtuner"
 KERNEL=="ttyUSB1",SYMLINK+="als600" 
+
+# the real kicker is that, on RPi anyway, this file has to be the last .rules file, otherwise
+# something else (maybe 99-com.rules?) overrides it. I ended up renaming 99-com.rules to 98-com.rules
+# in order to make sure all this stuff got done properly.
