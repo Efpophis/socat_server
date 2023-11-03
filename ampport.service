@@ -4,7 +4,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=root
+User=nobody
+Group=dialout
+RuntimeDirectory=socat_amp
 ExecStart=/usr/local/scripts/socat_amp.sh
 Restart=always
 

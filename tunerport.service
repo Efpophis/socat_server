@@ -4,8 +4,10 @@ After=network.target
 
 [Service]
 Type=simple
-User=root
+User=nobody
+Group=dialout
 ExecStart=/usr/local/scripts/socat_tuner.sh
+RuntimeDirectory=socat_tuner
 Restart=always
 
 [Install]
