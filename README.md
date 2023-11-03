@@ -14,7 +14,9 @@ Instructions:
 * run, for example, 'systemctl enable ampport.service --now' to add the service and start it
 * you should now be able to connect to the tcp port you specified and send/receive data to and from your serial device
 * Note that firewalls may get in the way of the tcp/ip connection. Fixing that is beyond the scope of this document
+* if you have more than one device you want to serve, and those usb serial adapters have the exact same VID/PID pair, then you have to get creative with udev rules to make sure they get the same ttyUSBx after a reboot. See 50-usb-serial.rules for details, and put your version into /etc/udeb/rules.d
 
 My Setup:
 
 I run this on a raspberry pi with the two serial devices connected. I use one of my other projects [LDGControl](https://github.com/efpophis/LDGControl) to connect and interact with the devices. This works on my LAN, and should work remotely thanks to my SoftEther VPN server (not yet tested).
+

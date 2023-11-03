@@ -1,0 +1,7 @@
+# if you have more than one serial port with the same vendorid / productid like I do,
+# you can use udevadm info --attribute-walk --path=/sys/bus/usb-serial/devices/ttyUSBx to 
+# determine the "KERNELS" value for each port and then use a rule like these to make sure
+# your devices always get the same device file.
+
+KERNEL=="ttyUSB*", KERNELS=="1-1.3:1.0", name="ttyUSB1"
+KERNEL=="ttyUSB*", KERNELS=="1-1.1.2:1.0", name="ttyUSB0"
