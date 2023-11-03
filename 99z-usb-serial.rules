@@ -1,0 +1,22 @@
+# if you have more than one serial port with the same vendorid / productid like I do,
+# you can use udevadm info --attribute-walk --path=/sys/bus/usb-serial/devices/ttyUSBx to 
+# determine the "KERNELS" value for each port and then use a rule like these to make sure
+# your devices always get the same device file.
+
+# this may or may not work. it didn't on my setup. Leaving this here in case it helps you.
+#KERNEL=="ttyUSB*", KERNELS=="1-1.3:1.0", name="ttyUSB1"
+#KERNEL=="ttyUSB*", KERNELS=="1-1.1.2:1.0", name="ttyUSB0"
+
+# what worked for me is to run udevadm info -a -n /dev/ttyUSB1 | grep '{serial}'
+# and get the serial number of each device (run it on ttyUSB0 as well), and then
+# create these rules.
+
+# obviously, replace your devices' serial numbers where applicable - the A1234567 and A7654321 are bogus
+# the idVendor and idProduct fields seem to be for FTDI USB UARTs, so it might be the same for you, or not.
+# you'll have to patch them for your specific hardware.
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6001",ATTRS{serial}=="A1234657",name="ttyUSB0"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403",ATTRS{idProduct}=="6001",ATTRS{serial}=="A7654321",name="ttyUSB1"
+
+# add symlinks, optionally, for your specific equipment.
+KERNEL=="ttyUSB0",SYMLINK+="ldgtuner"
+KERNEL=="ttyUSB1",SYMLINK+="als600" 
